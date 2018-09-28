@@ -15,8 +15,68 @@ namespace Alura.Loja.Testes.ConsoleApp
         {
             //AtualizarPromocao();
             //ListarPromocoes();
-            ListarProdutos();
+            //ListarProdutos();
+            //AdicionarCliente();
+            //ListarClientes();
+            ListarComprasProdutoComTotalMinimo();
             Pause();
+        }
+
+        private static void ListarComprasProdutoComTotalMinimo()
+        {
+            using (var produtoRepository = new ProdutoRepository())
+            {
+                var produto = produtoRepository.FindByIdAndComprasWithTotalMinimo(1, 200);
+                foreach (var compra in produto.Compras)
+                {
+                    Console.WriteLine(compra);
+                }
+            }
+        }
+
+        private static void ListarComprasProduto()
+        {
+            using (var produtoRepository = new ProdutoRepository())
+            {
+                var produto = produtoRepository.FindById(1002);
+                foreach(var compra in produto.Compras)
+                {
+                    Console.WriteLine(compra);
+                }
+            }
+        }
+
+        private static void ListarClientes()
+        {
+            using (var clienteRepository = new ClienteRepository())
+            {
+                var clientes = clienteRepository.ListAll();
+                foreach (var cliente in clientes)
+                {
+                    Console.WriteLine(cliente);
+                }
+            }
+        }
+
+        private static void AdicionarCliente()
+        {
+            var endereco = new Endereco
+            {
+                Cep = "08720400",
+                Logradouro = "Rua Antônio Ruiz Veiga",
+                Bairro = "Mogilar",
+                Cidade = "Mogi das Cruzes",
+                Numero = 100
+            };
+            var cliente = new Cliente
+            {
+                Endereco = endereco,
+                Nome = "Leão do Proerd"
+            };
+            using (var clienteRepository = new ClienteRepository())
+            {
+                clienteRepository.Save(cliente);
+            }
         }
 
         private static void AtualizarPromocao()

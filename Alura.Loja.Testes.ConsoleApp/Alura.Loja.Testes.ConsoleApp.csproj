@@ -132,7 +132,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20180928144442_Clientes.cs" />
+    <Compile Include="Migrations\20180928144442_Clientes.designer.cs">
+      <DependentUpon>20180928144442_Clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180928145508_CepEndereco.cs" />
+    <Compile Include="Migrations\20180928145508_CepEndereco.designer.cs">
+      <DependentUpon>20180928145508_CepEndereco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180928150352_CamposObrigatoriosEndereco.cs" />
+    <Compile Include="Migrations\20180928150352_CamposObrigatoriosEndereco.designer.cs">
+      <DependentUpon>20180928150352_CamposObrigatoriosEndereco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Compra.cs" />
+    <Compile Include="Models\Endereco.cs" />
+    <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\CompraRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="DbContexts\LojaContext.cs" />
