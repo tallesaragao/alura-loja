@@ -132,10 +132,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compra.cs" />
-    <Compile Include="CompraRepository.cs" />
-    <Compile Include="LojaContext.cs" />
-    <Compile Include="LojaContextFactory.cs" />
+    <Compile Include="Models\Compra.cs" />
+    <Compile Include="Repositories\CompraRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="DbContexts\LojaContext.cs" />
+    <Compile Include="Helpers\LojaContextFactory.cs" />
     <Compile Include="Migrations\20180926145645_Inicial.cs" />
     <Compile Include="Migrations\20180926145645_Inicial.designer.cs">
       <DependentUpon>20180926145645_Inicial.cs</DependentUpon>
@@ -156,11 +157,17 @@
     <Compile Include="Migrations\20180927142520_ComprasFix2.designer.cs">
       <DependentUpon>20180927142520_ComprasFix2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180928113526_Promocoes.cs" />
+    <Compile Include="Migrations\20180928113526_Promocoes.designer.cs">
+      <DependentUpon>20180928113526_Promocoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LojaContextModelSnapshot.cs" />
-    <Compile Include="Produto.cs" />
-    <Compile Include="ProdutoDAO.cs" />
-    <Compile Include="ProdutoRepository.cs" />
+    <Compile Include="Models\Produto.cs" />
+    <Compile Include="Repositories\ProdutoRepository.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Models\Promocao.cs" />
+    <Compile Include="Models\PromocaoProduto.cs" />
+    <Compile Include="Repositories\PromocaoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

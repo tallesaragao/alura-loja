@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Alura.Loja.Testes.ConsoleApp.DbContexts;
+using Alura.Loja.Testes.ConsoleApp.Models;
+using Alura.Loja.Testes.ConsoleApp.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +13,47 @@ namespace Alura.Loja.Testes.ConsoleApp
     {
         static void Main(string[] args)
         {
-            CadastrarCompraComProdutoNovo();
-            ListarCompras();
+            //AtualizarPromocao();
+            //ListarPromocoes();
+            ListarProdutos();
             Pause();
+        }
+
+        private static void AtualizarPromocao()
+        {
+            using (var promocaoRepository = new PromocaoRepository())
+            using (var produtoRepository = new ProdutoRepository())
+            {
+                var produto = produtoRepository.ListByNome("Harry Potter e a Pedra Filosofal").First();
+                var promocao = promocaoRepository.ListAll().First();
+                promocao.AdicionarProdutos(produto);
+                promocaoRepository.Update(promocao);
+            }
+        }
+
+        private static void ListarPromocoes()
+        {
+            using (var promocaoRepository = new PromocaoRepository())
+            {
+                var promocoes = promocaoRepository.ListAll();
+                foreach(var promocao in promocoes)
+                {
+                    Console.WriteLine(promocao);
+                }
+            }
+        }
+
+        private static void AdicionarPromocao()
+        {
+            var farinha = new Produto { Nome = "Café", Categoria = "Alimentos", PrecoUnitario = 2.49, Unidade = "Gramas" };
+            var cocaCola = new Produto { Nome = "Coca-Cola", Categoria = "Bebidas", PrecoUnitario = 7.99, Unidade = "Litros" };
+            var caneta = new Produto { Nome = "Caneta Esferográfica", Categoria = "Material Escolar", PrecoUnitario = 1.49, Unidade = "Unidade" };
+            var promocao = new Promocao { DataInicial = DateTime.Now.Date, DataFinal = DateTime.Now.Date.AddMonths(2), Descricao = "Promoção de Aniversário" };
+            promocao.AdicionarProdutos(farinha, cocaCola, caneta);
+            using (var promocaoRepository = new PromocaoRepository())
+            {
+                promocaoRepository.Save(promocao);
+            }
         }
 
         private static void CadastrarCompra()
@@ -64,9 +105,9 @@ namespace Alura.Loja.Testes.ConsoleApp
 
         private static void ListarProdutos()
         {
-            using(var context = new LojaContext())
+            using(var produtoRepository = new ProdutoRepository())
             {
-                IList<Produto> produtos = context.Produtos.ToList();
+                IList<Produto> produtos = produtoRepository.ListAll();
                 foreach(var produto in produtos)
                 {
                     Console.WriteLine(produto);
@@ -87,19 +128,6 @@ namespace Alura.Loja.Testes.ConsoleApp
             {
                 context.Produtos.Add(produto);
                 context.SaveChanges();
-            }
-        }
-
-        private static void GravarUsandoAdoNet()
-        {
-            Produto p = new Produto();
-            p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
-            p.PrecoUnitario = 19.89;
-
-            using (var repo = new ProdutoDAO())
-            {
-                repo.Adicionar(p);
             }
         }
 
