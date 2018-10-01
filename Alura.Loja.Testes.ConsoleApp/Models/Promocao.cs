@@ -21,7 +21,7 @@ namespace Alura.Loja.Testes.ConsoleApp.Models
             {
                 return new ReadOnlyCollection<PromocaoProduto>(promocoesProdutos);
             }
-            private set
+            set
             {
                 promocoesProdutos = value;
             }
